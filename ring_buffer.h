@@ -14,8 +14,10 @@ extern "C" {
 #include <stdint.h>
 #include <stdbool.h>
 
+#ifndef RING_BUFFER_SIZE
 #define RING_BUFFER_SIZE 64
-
+#endif
+    
     struct  rBuffer{
     unsigned char buffer[RING_BUFFER_SIZE];
     uint8_t head;
@@ -28,6 +30,8 @@ extern "C" {
     unsigned char ringRead(struct rBuffer *);
     bool ringTest(struct rBuffer *);
     uint8_t ringRemain(struct rBuffer *);
+
+    void ringWriteData(struct rBuffer *, unsigned char *);
 
 #ifdef	__cplusplus
 }

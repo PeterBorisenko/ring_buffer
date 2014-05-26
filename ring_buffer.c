@@ -36,3 +36,10 @@ bool ringTest(struct rBuffer *buff) {
 uint8_t ringRemain(struct rBuffer *buff) {
     return (((buff->tail)>(buff->head))?(buff->tail - buff->head):(RING_BUFFER_SIZE + buff->tail - buff->head));
 }
+
+void ringWriteData(struct rBuffer *buff, unsigned char *data) {
+    while(*data++){
+        while (ringRemain(buff) < *data);
+        ringWrite(buff, *data++);
+    }
+}
